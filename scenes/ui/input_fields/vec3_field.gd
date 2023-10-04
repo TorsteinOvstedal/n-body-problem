@@ -20,8 +20,7 @@ func bind(node, property) -> void:
 func submit(i: int, s: String) -> void:
 	var v = node.get(property)
 	if s.is_valid_float():
-		var value = s.to_float()
-		v[i] = value
+		v[i] = s.to_float()
 		node.set(property, v)
 		value_changed.emit(v)
 

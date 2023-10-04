@@ -17,8 +17,10 @@ var active_bodies := $celestial_bodies
 var pending_queue    := []
 var completion_queue := []
 
+# const BodyInstance := preload("res://scenes/simulation/body.tscn")
+
 func create_body() -> Body:
-	var body := Body.new()
+	var body := Body.new() # BodyInstance.instantiate()
 	init_body(body)
 	return body
 	
@@ -67,11 +69,18 @@ func _on_collision(body0: Body, body1: Body) -> void:
 	# Destroy both if similar mass.
 
 	const tresh_hold := 0.5
+	const max_pieces := 5
+	const min_pieces := 0
 
 	var cmp := body1.physics.mass / body0.physics.mass
 	
 	var destroy = func lambda(body):
 		completion_queue.append(body)
+		var r = body.physics.radius
+		var g = body.physics.gravity
+		var pieces = (randi() % (max_pieces + 1)) + min_pieces
+		for i in range(pieces):
+			pass
 		print(body, " was destroyed")
 
 	if cmp >= 1.0 + tresh_hold:

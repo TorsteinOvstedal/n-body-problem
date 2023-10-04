@@ -1,5 +1,4 @@
 @tool
-
 class_name EditorInputField
 
 extends Control
@@ -7,22 +6,31 @@ extends Control
 signal value_changed(value)
 
 var name_label: Label
-# var values: Array[LineEdit]
 
 var node
 var property: String
 
-func bind(node: Object, property: String, label: String = "") -> void:
+# show_label: bool is a hack to retro-fit field.gd as a script for just a LineEdit.
+
+func bind(node: Object, property: String, label: String = "", show_label: bool = true) -> void:
 	assert(node and node.get(property), "Cannot bind to %s, %s" % [str(node), property])
+	
 	if self.node:
 		release_focus()
+	
 	self.node     = node
 	self.property = property
 	
-	if label == "":
+	if show_label && label == "":
 		set_label(property)
-	else:
+	elif show_label:
 		set_label(label)
+
+	elif not show_label:
+		if not is_connected("text_changed", _on_changed):
+			connect("text_changed", _on_changed)
+		if not is_connected("text_submitted", _on_submitted):
+			connect("text_submitted", _on_submitted)
 
 func bound() -> bool:
 	return node != null
@@ -46,10 +54,25 @@ func set_label(text: String) -> void:
 # Abstract methods
 
 func is_valid():
-	pass
+	return true
 
 func get_value():
-	pass
+	return get("text")
 	
 func set_value(value):
-	pass
+	set("text", value)
+	
+func _physics_process(_delta: float) -> void:
+	if not bound():
+		return
+	
+	if not has_focus():
+		set_value(node.get(property))
+
+func _on_changed(new_text: String) -> void:
+	submit()
+
+func _on_submitted(new_text: String) -> void:
+	submit()
+	set_value(node.get(property))
+	release_focus()

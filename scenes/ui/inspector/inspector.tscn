@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://rahqqbn8bep4"]
+[gd_scene load_steps=6 format=3 uid="uid://rahqqbn8bep4"]
 
 [ext_resource type="Script" path="res://scenes/ui/inspector/inspector.gd" id="1_v48ba"]
 [ext_resource type="SystemFont" uid="uid://1c75lqbvqb5e" path="res://fonts/font.tres" id="2_i80gf"]
+[ext_resource type="Script" path="res://scenes/ui/input_fields/field.gd" id="3_nvbgi"]
 [ext_resource type="PackedScene" uid="uid://msjxosbfs3un" path="res://scenes/ui/input_fields/float_field.tscn" id="3_s7vov"]
 [ext_resource type="PackedScene" uid="uid://ge0nk28y3vqy" path="res://scenes/ui/input_fields/vec3_field.tscn" id="4_yp3xy"]
 
@@ -20,6 +21,7 @@ theme_override_fonts/font = ExtResource("2_i80gf")
 theme_override_font_sizes/font_size = 18
 text = "PlanetName"
 flat = true
+script = ExtResource("3_nvbgi")
 
 [node name="scrollable" type="ScrollContainer" parent="."]
 clip_contents = false

@@ -28,3 +28,6 @@ func _on_remove_btn_pressed() -> void:
 	
 func _on_select_btn_pressed() -> void:
 	select_request.emit(self)
+	
+func _process(delta):
+	select_btn.text = ref.physics.name

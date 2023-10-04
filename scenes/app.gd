@@ -9,20 +9,23 @@ var camera     := $camera
 @onready
 var ui :       = $ui
 
+var initial_state: State = null
+
 # const sun_scene := preload("res://scenes/simulation/sun.tscn")
 
 # var sun := sun_scene.instantiate()
 
 const body_scene := preload("res://scenes/simulation/body.tscn")
 
-var initial_state: State = null
+func init_body(body: Body) -> void:
+	simulation.init_body(body)
+
+	body.connect("picked", _on_sim_body_picked)
+
 
 func _init() -> void:
 	var star_field := create_starfield(1000)
 	add_child(star_field)
-
-func init_body(body: Body) -> void:
-	body.connect("picked", _on_sim_body_picked)
 
 func _ready() -> void:
 	# DEVELOPMENT DEBUGGING ----------------------------------------------------
@@ -34,7 +37,6 @@ func _ready() -> void:
 	for body in simulation.get_active_bodies():
 		body.state = Body.State.ACTIVE
 		init_body(body)
-		simulation.init_body(body)
 		simulation.active_bodies.remove_child(body)
 	
 	# Build scene
@@ -82,6 +84,8 @@ func _on_camera_no_target() -> void:
 	if bodies.size() > 0:
 		select_body(bodies[0])
 
+
+
 func _on_editor_reset() -> void:
 	# fix
 	if simulation.running:
@@ -95,13 +99,17 @@ func _on_editor_play() -> void:
 func _on_editor_pause() -> void:
 	simulation.running = false
 
+
 ## Creates a new body and adds it to the simulation.
 
 func _on_editor_add_body() -> void: 
 	var body = body_scene.instantiate()
-	body.physics.name = "Planet%d" % [1 + simulation.pending_queue.size() + simulation.get_active_bodies().size()]
 	init_body(body)
-	simulation.init_body(body)
+	
+	# Generate temporary name
+	var n_bodies = simulation.pending_queue.size() + simulation.get_active_bodies().size()
+	body.physics.name = "Planet%d" % [n_bodies + 1]
+
 	simulation.add_body(body)
 
 func _on_editor_select_body(entry: Entry) -> void:
@@ -109,6 +117,9 @@ func _on_editor_select_body(entry: Entry) -> void:
 
 func _on_editor_remove_body(entry: Entry) -> void:
 	simulation.remove_body(entry.ref)
+	
+
+## Save and load simulation state.
 
 class State extends RefCounted:
 	
@@ -120,6 +131,11 @@ class State extends RefCounted:
 func save_state(state: State = null) -> State:
 	if not state:
 		state = State.new()
+	
+	if not simulation:
+		call_deferred("save_state")
+		print("save state failed.")
+		return state
 		
 	for body in simulation.get_active_bodies():
 		state.refs.append(body)
@@ -137,6 +153,7 @@ func restore_state(state: State) -> void:
 	for body in state.refs:
 		body.reset()
 		simulation.add_body(body)
+
 
 ## Generate starfield mesh.
 

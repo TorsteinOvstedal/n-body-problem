@@ -5,7 +5,7 @@ extends MeshInstance3D
 const primitive := Mesh.PRIMITIVE_LINES
 
 var immediate_mesh: ImmediateMesh
-	x
+
 func _init():
 	immediate_mesh = ImmediateMesh.new()
 	mesh = immediate_mesh

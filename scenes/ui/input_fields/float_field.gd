@@ -18,11 +18,9 @@ func _ready():
 func _physics_process(_delta: float) -> void:
 	if not bound():
 		return
-	
-	var v = node.get(property)
-	print(node.name, ".", property, " = ", v)
+
 	if not input.has_focus():
-		input.text = str(v)
+		input.text = str(node.get(property))
 
 func _on_changed(new_text: String) -> void:
 	submit()
