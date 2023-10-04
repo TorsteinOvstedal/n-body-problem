@@ -1,0 +1,11 @@
+[gd_resource type="SystemFont" load_steps=2 format=3 uid="uid://1c75lqbvqb5e"]
+
+[sub_resource type="SystemFont" id="SystemFont_3clq4"]
+
+[resource]
+font_names = PackedStringArray("Bahnschrift")
+font_weight = 300
+font_stretch = 75
+hinting = 2
+multichannel_signed_distance_field = true
+fallbacks = Array[Font]([SubResource("SystemFont_3clq4")])

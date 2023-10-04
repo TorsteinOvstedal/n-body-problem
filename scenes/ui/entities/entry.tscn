@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://rqhk8h63dqol"]
+
+[ext_resource type="PackedScene" uid="uid://cyjf7kv4j47ad" path="res://scenes/ui/buttons/editor_button.tscn" id="1_2v2m6"]
+[ext_resource type="Texture2D" uid="uid://dwar1yg5qdjva" path="res://textures/icons/icons-set-1_0000s_0075_Layer-167.png" id="1_of4n1"]
+[ext_resource type="Script" path="res://scenes/ui/entities/entry.gd" id="3_ryw8v"]
+
+[node name="entry" type="Control"]
+custom_minimum_size = Vector2(10, 20)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 25.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("3_ryw8v")
+
+[node name="remove_btn" parent="." instance=ExtResource("1_2v2m6")]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 8.0
+offset_right = 2.0
+offset_bottom = 8.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("1_of4n1")
+
+[node name="select_btn" parent="." instance=ExtResource("1_2v2m6")]
+layout_mode = 0
+offset_left = 22.0
+offset_right = 118.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 22
+text = "LOREM IPSUM"
+alignment = 0

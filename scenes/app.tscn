@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://bm0jfa02lrggb"]
+
+[ext_resource type="Script" path="res://scenes/app.gd" id="1_fouh2"]
+[ext_resource type="PackedScene" uid="uid://6tevt4w02h3s" path="res://scenes/simulation/solar_system.tscn" id="2_52tbc"]
+[ext_resource type="Environment" uid="uid://cpcvjfcq4bxru" path="res://environments/env0.tres" id="3_8jl7v"]
+[ext_resource type="Script" path="res://scenes/utils/look_at_camera.gd" id="4_7qa75"]
+[ext_resource type="PackedScene" uid="uid://cvff6pme46tch" path="res://scenes/ui/editor.tscn" id="5_jt6ce"]
+
+[node name="app" type="Node3D"]
+script = ExtResource("1_fouh2")
+
+[node name="solar_system" parent="." instance=ExtResource("2_52tbc")]
+
+[node name="camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.443359, 17.8132)
+environment = ExtResource("3_8jl7v")
+script = ExtResource("4_7qa75")
+
+[node name="ui" parent="." instance=ExtResource("5_jt6ce")]
+mouse_filter = 1

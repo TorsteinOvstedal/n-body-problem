@@ -1,0 +1,72 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4k3v1pnmrsb1"]
+
+[ext_resource type="PackedScene" uid="uid://drsgnfbxbkcbh" path="res://scenes/simulation/body.tscn" id="1_vw8mo"]
+[ext_resource type="Script" path="res://scenes/simulation/body_state.gd" id="2_8l6tw"]
+[ext_resource type="Shader" path="res://shaders/sun.gdshader" id="2_dxh8o"]
+
+[sub_resource type="Resource" id="Resource_ttvs6"]
+resource_local_to_scene = true
+script = ExtResource("2_8l6tw")
+name = ""
+radius = 1.0
+gravity = 1.0
+initial_velocity = Vector3(0, 0, 0)
+initial_position = Vector3(0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_pe5j0"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1bao2"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k2kpu"]
+color_ramp = SubResource("Gradient_pe5j0")
+noise = SubResource("FastNoiseLite_1bao2")
+
+[sub_resource type="Gradient" id="Gradient_wwfil"]
+offsets = PackedFloat32Array(0.337461, 0.845201)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cxu2l"]
+noise_type = 3
+frequency = 0.073
+fractal_type = 2
+fractal_octaves = 1
+fractal_lacunarity = 10.0
+fractal_gain = 1.25
+fractal_weighted_strength = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nsood"]
+color_ramp = SubResource("Gradient_wwfil")
+noise = SubResource("FastNoiseLite_cxu2l")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u2m0o"]
+render_priority = 0
+shader = ExtResource("2_dxh8o")
+shader_parameter/Glow_Power = 5.0
+shader_parameter/Lightness_Difference = 0.335
+shader_parameter/Sun_Color = Color(1, 0.8, 0.0941176, 1)
+shader_parameter/waveSpeed = 0.01
+shader_parameter/fresnel = 1.428
+shader_parameter/scale = 0.55
+shader_parameter/blendSharpness = 0.0
+shader_parameter/voronoi_noise = SubResource("NoiseTexture2D_nsood")
+shader_parameter/emission_noise = SubResource("NoiseTexture2D_k2kpu")
+
+[sub_resource type="SphereMesh" id="SphereMesh_fnbqq"]
+material = SubResource("ShaderMaterial_u2m0o")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4rwp8"]
+resource_local_to_scene = true
+radius = 1.0
+
+[node name="sun" instance=ExtResource("1_vw8mo")]
+physics = SubResource("Resource_ttvs6")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="mesh_instance" parent="." index="0"]
+mesh = SubResource("SphereMesh_fnbqq")
+
+[node name="collision_shape" parent="." index="1"]
+shape = SubResource("SphereShape3D_4rwp8")
+
+[node name="light" type="OmniLight3D" parent="." index="2"]
+omni_range = 4096.0

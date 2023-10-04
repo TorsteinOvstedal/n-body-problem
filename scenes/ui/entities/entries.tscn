@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="SystemFont" uid="uid://1c75lqbvqb5e" path="res://fonts/font.tres" id="1_pqyck"]
+[ext_resource type="Script" path="res://scenes/ui/entities/entries.gd" id="1_w7eac"]
+[ext_resource type="Texture2D" uid="uid://jospi1qlsft6" path="res://textures/icons/icons-set-1_0000s_0076_Layer-168.png" id="2_s1eqd"]
+[ext_resource type="PackedScene" uid="uid://cyjf7kv4j47ad" path="res://scenes/ui/buttons/editor_button.tscn" id="2_sei3l"]
+
+[node name="entries" type="Panel"]
+offset_right = 200.0
+offset_bottom = 250.0
+script = ExtResource("1_w7eac")
+
+[node name="title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 49.0
+offset_bottom = 24.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("1_pqyck")
+theme_override_font_sizes/font_size = 24
+text = "Celestial Bodies"
+vertical_alignment = 1
+
+[node name="add_btn" parent="." instance=ExtResource("2_sei3l")]
+layout_mode = 0
+offset_left = 153.0
+offset_top = 25.0
+offset_right = 290.0
+offset_bottom = 162.0
+scale = Vector2(0.1, 0.1)
+icon = ExtResource("2_s1eqd")
+
+[node name="scrollable" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vbox" type="VBoxContainer" parent="scrollable"]
+layout_mode = 2
+theme_override_constants/separation = 16

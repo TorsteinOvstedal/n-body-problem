@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://cyjf7kv4j47ad"]
+
+[ext_resource type="SystemFont" uid="uid://1c75lqbvqb5e" path="res://fonts/font.tres" id="1_h37f3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w13xx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yylld"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7pvdl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v842p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_38sxx"]
+
+[node name="editor_button" type="Button"]
+focus_mode = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_pressed_color = Color(0.658824, 0.913725, 0.454902, 1)
+theme_override_colors/font_hover_color = Color(0.580392, 0.827451, 0.921569, 1)
+theme_override_colors/font_focus_color = Color(0.580392, 0.827451, 0.921569, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.658824, 0.913725, 0.454902, 1)
+theme_override_colors/font_disabled_color = Color(1, 0.34902, 0.352941, 1)
+theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(0.658824, 0.913725, 0.454902, 1)
+theme_override_colors/icon_hover_color = Color(0.580392, 0.827451, 0.921569, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.658824, 0.913725, 0.454902, 1)
+theme_override_colors/icon_focus_color = Color(0.580392, 0.827451, 0.921569, 1)
+theme_override_colors/icon_disabled_color = Color(1, 0.34902, 0.352941, 1)
+theme_override_fonts/font = ExtResource("1_h37f3")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_w13xx")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_yylld")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_7pvdl")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_v842p")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_38sxx")
+flat = true
+icon_alignment = 1

@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://drsgnfbxbkcbh"]
+
+[ext_resource type="Script" path="res://scenes/simulation/body.gd" id="1_2fe1p"]
+[ext_resource type="Script" path="res://scenes/simulation/body_state.gd" id="2_3mk25"]
+
+[sub_resource type="Resource" id="Resource_rq4uo"]
+resource_local_to_scene = true
+script = ExtResource("2_3mk25")
+name = ""
+radius = 1.0
+gravity = 1.0
+initial_velocity = Vector3(0, 0, 0)
+initial_position = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6com"]
+shading_mode = 2
+albedo_color = Color(0.305882, 0.921569, 0.211765, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_8ntfw"]
+material = SubResource("StandardMaterial3D_r6com")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2bemm"]
+resource_local_to_scene = true
+radius = 1.0
+
+[node name="celestial_body" type="CharacterBody3D"]
+motion_mode = 1
+script = ExtResource("1_2fe1p")
+physics = SubResource("Resource_rq4uo")
+
+[node name="mesh_instance" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+mesh = SubResource("SphereMesh_8ntfw")
+
+[node name="collision_shape" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_2bemm")

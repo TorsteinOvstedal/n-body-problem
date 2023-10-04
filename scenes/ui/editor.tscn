@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://cvff6pme46tch"]
+
+[ext_resource type="Script" path="res://scenes/ui/editor.gd" id="1_fd044"]
+[ext_resource type="PackedScene" path="res://scenes/ui/entities/entries.tscn" id="2_5m2mm"]
+[ext_resource type="Texture2D" uid="uid://cfobxseqkje1i" path="res://textures/icons/icons-set-1_0000s_0051_Layer-143.png" id="3_1afy1"]
+[ext_resource type="PackedScene" uid="uid://rahqqbn8bep4" path="res://scenes/ui/inspector/inspector.tscn" id="3_ei07m"]
+[ext_resource type="PackedScene" path="res://scenes/ui/buttons/binary_button.tscn" id="5_scfaw"]
+[ext_resource type="PackedScene" uid="uid://cyjf7kv4j47ad" path="res://scenes/ui/buttons/editor_button.tscn" id="5_xotok"]
+[ext_resource type="Texture2D" uid="uid://cut8dinn1impk" path="res://textures/icons/icons-set-1_0000s_0083_Layer-175.png" id="7_4y8sb"]
+[ext_resource type="Texture2D" uid="uid://cwrx3lbr4jmit" path="res://textures/icons/icons-set-1_0000s_0079_Layer-171.png" id="8_5kvey"]
+
+[node name="editor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fd044")
+
+[node name="entries" parent="." instance=ExtResource("2_5m2mm")]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -125.0
+offset_right = 216.0
+offset_bottom = 125.0
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="inspector" parent="." instance=ExtResource("3_ei07m")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -125.0
+offset_right = -16.0
+offset_bottom = 125.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="sim_controls" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -115.0
+offset_right = 160.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(164.445, 77.7775)
+theme_override_constants/separation = 100
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="reset_btn" parent="sim_controls" instance=ExtResource("5_xotok")]
+layout_mode = 2
+icon = ExtResource("3_1afy1")
+
+[node name="run_btn" parent="sim_controls" instance=ExtResource("5_scfaw")]
+layout_mode = 2
+icon = ExtResource("7_4y8sb")
+icon0 = ExtResource("7_4y8sb")
+icon1 = ExtResource("8_5kvey")
+
+[editable path="inspector"]
+[editable path="inspector/scrollable/vbox/radius"]
+[editable path="inspector/scrollable/vbox/gravity"]
+[editable path="inspector/scrollable/vbox/position"]
+[editable path="inspector/scrollable/vbox/initial_velocity"]
+[editable path="inspector/scrollable/vbox/velocity"]

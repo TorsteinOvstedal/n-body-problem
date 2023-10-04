@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=3 uid="uid://rahqqbn8bep4"]
+
+[ext_resource type="Script" path="res://scenes/ui/inspector/inspector.gd" id="1_v48ba"]
+[ext_resource type="SystemFont" uid="uid://1c75lqbvqb5e" path="res://fonts/font.tres" id="2_i80gf"]
+[ext_resource type="PackedScene" uid="uid://msjxosbfs3un" path="res://scenes/ui/input_fields/float_field.tscn" id="3_s7vov"]
+[ext_resource type="PackedScene" uid="uid://ge0nk28y3vqy" path="res://scenes/ui/input_fields/vec3_field.tscn" id="4_yp3xy"]
+
+[node name="inspector" type="Panel"]
+offset_right = 200.0
+offset_bottom = 250.0
+script = ExtResource("1_v48ba")
+
+[node name="name" type="LineEdit" parent="."]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 192.0
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("2_i80gf")
+theme_override_font_sizes/font_size = 18
+text = "PlanetName"
+flat = true
+
+[node name="scrollable" type="ScrollContainer" parent="."]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 47.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vbox" type="VBoxContainer" parent="scrollable"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="radius" parent="scrollable/vbox" instance=ExtResource("3_s7vov")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="name" parent="scrollable/vbox/radius/layout" index="0"]
+text = "radius
+"
+
+[node name="gravity" parent="scrollable/vbox" instance=ExtResource("3_s7vov")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="name" parent="scrollable/vbox/gravity/layout" index="0"]
+text = "gravity"
+
+[node name="position" parent="scrollable/vbox" instance=ExtResource("4_yp3xy")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="name" parent="scrollable/vbox/position/layout" index="0"]
+text = "p  "
+
+[node name="initial_velocity" parent="scrollable/vbox" instance=ExtResource("4_yp3xy")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="name" parent="scrollable/vbox/initial_velocity/layout" index="0"]
+text = "v0"
+
+[node name="velocity" parent="scrollable/vbox" instance=ExtResource("4_yp3xy")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="name" parent="scrollable/vbox/velocity/layout" index="0"]
+text = "v  "
+
+[editable path="scrollable/vbox/radius"]
+[editable path="scrollable/vbox/gravity"]
+[editable path="scrollable/vbox/position"]
+[editable path="scrollable/vbox/initial_velocity"]
+[editable path="scrollable/vbox/velocity"]

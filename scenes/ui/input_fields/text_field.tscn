@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://bq5w2taa4t7ng"]
+
+[ext_resource type="Script" path="res://scenes/ui/input_fields/text_field.gd" id="1_kj33h"]
+[ext_resource type="SystemFont" uid="uid://1c75lqbvqb5e" path="res://fonts/font.tres" id="2_xpani"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rqdxl"]
+
+[node name="text_field" type="Panel"]
+offset_right = 180.0
+offset_bottom = 40.0
+script = ExtResource("1_kj33h")
+metadata/_edit_lock_ = true
+
+[node name="layout" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 5.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="name" type="Label" parent="layout"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_xpani")
+theme_override_font_sizes/font_size = 16
+text = "Name"
+vertical_alignment = 1
+
+[node name="value" type="LineEdit" parent="layout"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_xpani")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rqdxl")
+placeholder_text = "name"
+flat = true
+caret_blink = true

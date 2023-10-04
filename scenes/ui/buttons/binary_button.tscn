@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="PackedScene" uid="uid://cyjf7kv4j47ad" path="res://scenes/ui/buttons/editor_button.tscn" id="1_6k14x"]
+[ext_resource type="Script" path="res://scenes/ui/buttons/binary_button.gd" id="2_aubs1"]
+
+[node name="editor_button" instance=ExtResource("1_6k14x")]
+script = ExtResource("2_aubs1")
