@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://scenes/simulation/body_state.gd" id="3_gna7p"]
 [ext_resource type="PackedScene" uid="uid://drsgnfbxbkcbh" path="res://scenes/simulation/body.tscn" id="6_gxgs2"]
 
-[sub_resource type="Resource" id="Resource_m2jv3"]
+[sub_resource type="Resource" id="Resource_k7anj"]
 resource_local_to_scene = true
 script = ExtResource("3_gna7p")
 name = "sun"
@@ -14,25 +14,25 @@ gravity = 20.0
 initial_velocity = Vector3(0, 0, 0)
 initial_position = Vector3(0, 0, 0)
 
-[sub_resource type="Resource" id="Resource_vnuy7"]
+[sub_resource type="Resource" id="Resource_qip2o"]
 resource_local_to_scene = true
 script = ExtResource("3_gna7p")
 name = "planet 0"
 radius = 1.0
 gravity = 1.0
-initial_velocity = Vector3(1, 0, 0)
+initial_velocity = Vector3(-2.5, -1, 2.5)
 initial_position = Vector3(0, 0, 0)
 
-[sub_resource type="Resource" id="Resource_flkvk"]
+[sub_resource type="Resource" id="Resource_12dgm"]
 resource_local_to_scene = true
 script = ExtResource("3_gna7p")
 name = "ding dong"
 radius = 1.0
 gravity = 1.0
-initial_velocity = Vector3(2, 0, 0)
+initial_velocity = Vector3(4, 0, 1)
 initial_position = Vector3(0, 0, 0)
 
-[sub_resource type="Resource" id="Resource_0k2vu"]
+[sub_resource type="Resource" id="Resource_82kig"]
 resource_local_to_scene = true
 script = ExtResource("3_gna7p")
 name = "ping"
@@ -41,16 +41,16 @@ gravity = 1.0
 initial_velocity = Vector3(1, 1, 2)
 initial_position = Vector3(0, 0, 0)
 
-[sub_resource type="Resource" id="Resource_wnuw4"]
+[sub_resource type="Resource" id="Resource_e0rlj"]
 resource_local_to_scene = true
 script = ExtResource("3_gna7p")
 name = "pluto"
 radius = 1.0
 gravity = 1.0
-initial_velocity = Vector3(0, 2, 0)
+initial_velocity = Vector3(2, 1, -1)
 initial_position = Vector3(0, 0, 0)
 
-[sub_resource type="Resource" id="Resource_sy3x7"]
+[sub_resource type="Resource" id="Resource_v06ro"]
 resource_local_to_scene = true
 script = ExtResource("3_gna7p")
 name = "mikkey"
@@ -65,29 +65,29 @@ script = ExtResource("1_hrx3e")
 [node name="celestial_bodies" type="Node3D" parent="."]
 
 [node name="sun" parent="celestial_bodies" instance=ExtResource("2_m1gxu")]
-physics = SubResource("Resource_m2jv3")
+physics = SubResource("Resource_k7anj")
 
 [node name="celestial_body" parent="celestial_bodies" instance=ExtResource("6_gxgs2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, 0)
 velocity = Vector3(0, 3, 0)
-physics = SubResource("Resource_vnuy7")
+physics = SubResource("Resource_qip2o")
 
 [node name="celestial_body2" parent="celestial_bodies" instance=ExtResource("6_gxgs2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.5875)
 velocity = Vector3(3, 0, 0)
-physics = SubResource("Resource_flkvk")
+physics = SubResource("Resource_12dgm")
 
 [node name="celestial_body4" parent="celestial_bodies" instance=ExtResource("6_gxgs2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0806, 0, -12.4945)
 velocity = Vector3(3, 0, 0)
-physics = SubResource("Resource_0k2vu")
+physics = SubResource("Resource_82kig")
 
 [node name="celestial_body5" parent="celestial_bodies" instance=ExtResource("6_gxgs2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.96936, 4.08331, -12.4945)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.969, 20, -20)
 velocity = Vector3(3, 0, 0)
-physics = SubResource("Resource_wnuw4")
+physics = SubResource("Resource_e0rlj")
 
 [node name="celestial_body6" parent="celestial_bodies" instance=ExtResource("6_gxgs2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.16772, -11.2625, -12.4945)
 velocity = Vector3(3, 0, 0)
-physics = SubResource("Resource_sy3x7")
+physics = SubResource("Resource_v06ro")

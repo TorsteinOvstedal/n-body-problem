@@ -3,6 +3,8 @@ extends Control
 signal play
 signal pause
 signal reset
+signal save
+signal load
 
 @onready var entries   := $entries
 
@@ -28,6 +30,12 @@ func _unhandled_key_input(event):
 	if event.is_action_pressed("ui_select"):
 		run_btn.toggle()
 	
+	# Save load request
+	elif event.is_action_pressed("save"):
+		save.emit()
+	elif event.is_action_pressed("load"):
+		load.emit()
+
 	# Release focused input field.
 	elif  event.is_action_pressed("ui_cancel") and focused:
 		focused.release_focus()

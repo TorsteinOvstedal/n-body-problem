@@ -18,10 +18,8 @@ var initial_state: State = null
 const body_scene := preload("res://scenes/simulation/body.tscn")
 
 func init_body(body: Body) -> void:
-	simulation.init_body(body)
-
 	body.connect("picked", _on_sim_body_picked)
-
+	body.connect("crashed", _on_sim_bodies_crashed)
 
 func _init() -> void:
 	var star_field := create_starfield(1000)
@@ -57,19 +55,22 @@ func _ready() -> void:
 	ui.connect("reset", _on_editor_reset)
 	ui.connect("play",  _on_editor_play)
 	ui.connect("pause", _on_editor_pause)
+	
+	# Editor Persistent state management
+	
+	ui.connect("save", _on_editor_save)
+	ui.connect("load", _on_editor_load)
 
-	# Editor Simulation Body Overview signals.
+	# Editor Simulation Body signals.
 	
 	ui.entries.connect("add_request",    _on_editor_add_body)
 	ui.entries.connect("select_request", _on_editor_select_body)
 	ui.entries.connect("remove_request", _on_editor_remove_body)
 
 func _on_sim_body_entered(body: Body) -> void:
-	print(body, " entered.")
 	ui.entries.add_body(body)
 
 func _on_sim_body_exited(body: Body) -> void:
-	print(body, " exited.")
 	ui.entries.remove_body(body)
 	
 func select_body(body: Body) -> void:
@@ -79,15 +80,38 @@ func select_body(body: Body) -> void:
 func _on_sim_body_picked(body: Body) -> void:
 	select_body(body)
 
+func _on_sim_bodies_crashed(body0: Body, body1: Body) -> void:
+	# If significant mass difference, destroy the smaller one.
+	# Destroy both if similar mass.
+
+	const tresh_hold := 0.5
+
+	var cmp := body1.physics.mass / body0.physics.mass
+	
+	var destroy = func lambda(body):
+		simulation.remove_body(body)
+		# var debree = shatter(body)
+		# for b in debree:
+		# 	simulation.add_body(b)
+
+	if cmp >= 1.0 + tresh_hold:
+		destroy.call(body0)
+
+	elif cmp <= tresh_hold:
+		destroy.call(body1)
+
+	else:
+		destroy.call(body0)
+		destroy.call(body1)
+
+
 func _on_camera_no_target() -> void:
 	var bodies = simulation.get_active_bodies()
 	if bodies.size() > 0:
 		select_body(bodies[0])
 
 
-
 func _on_editor_reset() -> void:
-	# fix
 	if simulation.running:
 		ui.run_btn.toggle()
 
@@ -99,6 +123,13 @@ func _on_editor_play() -> void:
 func _on_editor_pause() -> void:
 	simulation.running = false
 
+func _on_editor_save() -> void:
+	var dialog := FileDialog.new()
+
+	add_child(dialog)
+
+func _on_editor_load() -> void:
+	pass
 
 ## Creates a new body and adds it to the simulation.
 
@@ -146,14 +177,11 @@ func save_state(state: State = null) -> State:
 func restore_state(state: State) -> void:
 	# Clear simulation
 	simulation.reset()
-
-	assert(simulation.active_bodies.get_child_count() == 0)
 	
 	# Repopulate with initial state.
 	for body in state.refs:
 		body.reset()
 		simulation.add_body(body)
-
 
 ## Generate starfield mesh.
 

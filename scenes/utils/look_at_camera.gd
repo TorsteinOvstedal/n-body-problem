@@ -15,7 +15,7 @@ func set_target(path: NodePath) -> void:
 	target = get_node_or_null(path)
 
 func _unhandled_input(event):
-	print(event)
+	pass
 	
 	if event is InputEventMouseButton:
 		if event.button_index == 4:

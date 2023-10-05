@@ -16,25 +16,16 @@ var active_bodies := $celestial_bodies
 
 var pending_queue    := []
 var completion_queue := []
-
-# const BodyInstance := preload("res://scenes/simulation/body.tscn")
-
-func create_body() -> Body:
-	var body := Body.new() # BodyInstance.instantiate()
-	init_body(body)
-	return body
 	
-func init_body(body: Body) -> void:
-	body.state = Body.State.INACTIVE
-	body.connect("crashed", _on_collision)
+# func init_body(body: Body) -> void:
+	# body.state = Body.State.INACTIVE
+	# body.connect("crashed", _on_collision)
 
 func add_body(body: Body) -> void:
 	pending_queue.push_back(body)
 	body.state = Body.State.PENDING
 
 func remove_body(body: Body) -> void:
-	print("REMOVE ", body, ". Status: ", body.state)
-
 	if body.state == Body.State.PENDING:
 		var index := pending_queue.find(body)
 		pending_queue.remove_at(index)
@@ -62,36 +53,6 @@ func reset() -> void:
 
 ## Handle collision between two bodies.
 
-func _on_collision(body0: Body, body1: Body) -> void:
-	print_debug(body0.name, " collided with ", body1.name)
-	
-	# If significant mass difference, destroy the smaller one.
-	# Destroy both if similar mass.
-
-	const tresh_hold := 0.5
-	const max_pieces := 5
-	const min_pieces := 0
-
-	var cmp := body1.physics.mass / body0.physics.mass
-	
-	var destroy = func lambda(body):
-		completion_queue.append(body)
-		var r = body.physics.radius
-		var g = body.physics.gravity
-		var pieces = (randi() % (max_pieces + 1)) + min_pieces
-		for i in range(pieces):
-			pass
-		print(body, " was destroyed")
-
-	if cmp >= 1.0 + tresh_hold:
-		destroy.call(body0)
-
-	elif cmp <= tresh_hold:
-		destroy.call(body1)
-
-	else:
-		destroy.call(body0)
-		destroy.call(body1)
 
 ## Returns the active bodies in the simulation.
 ## 
@@ -100,7 +61,7 @@ func get_active_bodies():
 	
 func _body_enter(body: Body) -> void:
 	if body.is_inside_tree():
-		print("warning: ", body.physics.name, " is already in the tree.")
+		print("WARNING: ", body.physics.name, " is already in the tree.")
 		return
 
 	active_bodies.add_child(body)

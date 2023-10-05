@@ -1,0 +1,4 @@
+res://scenes/app.gd
+res://test/filedialog.tscn
+res://scenes/ui/editor.tscn
+res://test/filedialog.gd

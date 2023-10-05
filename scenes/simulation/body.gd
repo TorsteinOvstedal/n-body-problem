@@ -4,8 +4,6 @@ class_name Body
 
 extends CharacterBody3D
 
-signal trajectory_changed(this)
-
 signal crashed(this, other)
 
 signal picked(this)
@@ -21,12 +19,12 @@ func update_velocity(timestep: float, bodies):
 	for other in bodies:
 		if self == other:
 			continue
-			
+
 		var displacement: Vector3 = other.global_position - global_position		
 
 		# Newton's law of universal gravitation.
 		#
-		# 	F = G * (m0 * m1) / r^2
+		# F = G * (m0 * m1) / r^2
 	
 		var  rr: float = displacement.length_squared()
 		var  m0: float = physics.mass
@@ -37,11 +35,9 @@ func update_velocity(timestep: float, bodies):
 		
 		# Newton's second law of motion.
 		#
-		# 	F = m * a
+		# F = m * a
 	
 		var acceleration := force / m0
-		
-		# NOTE: m0 can be canceled from both equations.
 		
 		# Apply change in velocity.
 	
@@ -64,10 +60,12 @@ func _ready() -> void:
 	connect("input_event", _on_input_event)
 
 func _on_radius_changed() -> void:
+	# Scale mesh
 	var s := physics.radius * 2
 	var mesh: MeshInstance3D = $mesh_instance
 	mesh.scale = Vector3(s, s, s)
 	
+	# Scale collision shape
 	var collision_shape: SphereShape3D = $collision_shape.shape
 	collision_shape.radius = physics.radius
 	
