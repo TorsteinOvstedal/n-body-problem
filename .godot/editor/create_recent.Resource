@@ -1,0 +1,3 @@
+CompressedTexture2D
+CompressedTexture2DArray
+StandardMaterial3D

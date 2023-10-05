@@ -1,0 +1,5 @@
+res://scenes/simulation/sun.tscn
+res://fonts/font.tres
+res://scenes/app.tscn
+res://scenes/simulation/body.tscn
+res://scenes/ui/editor.tscn
